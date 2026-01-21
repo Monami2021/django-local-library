@@ -28,7 +28,7 @@ class Genre(models.Model):
                     ),
                 ]
 class Book(models.Model):
-    """Model representating a book (but not a specific copy of a book)."""
+    """Model representing a book (but not a specific copy of a book)."""
     title = models.CharField(max_length=200)
     author= models.ForeignKey('Author', on_delete=models.RESTRICT, null=True)
     # Foreign Key used because book can have only one author, but authors can have multiple books.
@@ -58,7 +58,7 @@ class Book(models.Model):
 
 class BookInstance(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4,
-                          help_text="Unique ID for this particular book across whole libray")
+                          help_text="Unique ID for this particular book across whole library")
     book = models.ForeignKey('Book', on_delete=models.RESTRICT, null=True)
     imprint= models.CharField(max_length=200)
     due_back = models.DateField(null=True, blank=True)
@@ -75,7 +75,7 @@ class BookInstance(models.Model):
             choices=LOAN_STATUS,
             blank=True,
             default='m',
-            help_text='Book availabilty',
+            help_text='Book availability',
 
             )
     class Meta:
@@ -92,8 +92,6 @@ class Author(models.Model):
     date_of_birth = models.DateField(null=True, blank=True)
     date_of_death = models.DateField('Died', null=True, blank=True)
 
-    class Meta: 
-        ordering = ['last_name', 'first_name']
 
     def get_absolute_url(self):
         """Returns the URL to access a particular author instance."""
@@ -103,16 +101,18 @@ class Author(models.Model):
         """String for representing the Model object."""
         return f'{self.first_name}, {self.last_name}'
 
+    class Meta: 
+        ordering = ['last_name']
 
 class Language(models.Model):
     """Model representing a language (e.g. English, French, Japanese, etc.)"""
     name = models.CharField(max_length=200,
                             unique=True,
-                            help_text="Enter the books natureal languaege (e.g. English, French, Japanese, etc)")
+                            help_text="Enter the books natural language (e.g. English, French, Japanese, etc)")
 
     def get_absolute_url(self):
         """Return the url to access a particular language instance"""
-        return reverse('language detaol', args=[str(self.id)])
+        return reverse('language detail', args=[str(self.id)])
 
     def __str__(self):
         """String for representing the Model object (in Admin site etc.)"""

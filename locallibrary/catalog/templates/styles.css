@@ -1,0 +1,15 @@
+.sidebar-nav{
+  margin-top: 20px;
+  padding: 0;
+  list-style: none;
+}
+a:link {
+  text-decoration: none;
+  color: red;
+}
+a:visited{
+  text-decoration: none;
+}
+p{
+  color: yellow;
+}
