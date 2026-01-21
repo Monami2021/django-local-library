@@ -3,6 +3,9 @@ from django.db import models
 from django.urls import reverse
 from django.db.models.functions import Lower
 from django.db.models import UniqueConstraint
+from django.conf import settings
+from django.contrib.auth.models import User
+from datetime import date
 
 # Create your models here.
 class Genre(models.Model):
@@ -18,6 +21,7 @@ class Genre(models.Model):
     def get_absolute_url(self):
         """Returns the url to access a particular genre instance."""
         return reverse('genre-detail', args=[str(self.id)])
+
 
     class Meta:
         constraints = [
@@ -58,10 +62,11 @@ class Book(models.Model):
 
 class BookInstance(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4,
-                          help_text="Unique ID for this particular book across whole library")
+    help_text="Unique ID for this particular book across whole library")
     book = models.ForeignKey('Book', on_delete=models.RESTRICT, null=True)
     imprint= models.CharField(max_length=200)
     due_back = models.DateField(null=True, blank=True)
+    borrower = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True)
 
     LOAN_STATUS = (
             ('m', 'Maintenance'),
@@ -84,6 +89,11 @@ class BookInstance(models.Model):
         def __str__(self):
             """String for representing the Model object."""
             return f'{self.id} ({self.book.title})'
+    
+    @property
+    def is_overdue(self):
+        """Determine if a book is overdue based on due date and current date."""
+        return bool(self.due_back and date.today() > self.due_back)
 
 class Author(models.Model):
     """Model representing an author."""
