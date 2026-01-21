@@ -3,12 +3,9 @@
   padding: 0;
   list-style: none;
 }
-a:link {
-  text-decoration: none;
-  color: red;
-}
-a:visited{
-  text-decoration: none;
+
+li{
+  font-size: 100px;
 }
 p{
   color: yellow;
