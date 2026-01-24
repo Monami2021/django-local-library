@@ -14,8 +14,6 @@ from posix import environ
 from dotenv import load_dotenv
 import dj_database_url
 
-env_path = load_dotenv(os.path.join('BASE_DIR', '.env'))
-load_dotenv(env_path)
 
 from pathlib import Path
 
@@ -23,6 +21,8 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
+env_path = load_dotenv(os.path.join(BASE_DIR, '.env'))
+load_dotenv(env_path)
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
