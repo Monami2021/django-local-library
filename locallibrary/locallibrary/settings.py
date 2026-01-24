@@ -34,7 +34,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY','django-insecure-dz295&!*ye^^8*p
 #DEBUG = True
 DEBUG = os.environ.get('DJANGO_DEBUG','') != 'False'
 
-ALLOWED_HOSTS = ['https://monamijer.pythonanywhere.com']
+ALLOWED_HOSTS = ['monamijer.pythonanywhere.com', '127.0.0.1']
 
 CSRF_TRUSTED_ORIGINS = ['https://monamijer.pythonanywhere.com']
 
