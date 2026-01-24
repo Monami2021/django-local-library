@@ -6,6 +6,7 @@ from django.db.models import UniqueConstraint
 from django.conf import settings
 from django.contrib.auth.models import User
 from datetime import date
+from django.forms import ModelForm
 
 # Create your models here.
 class Genre(models.Model):
@@ -41,8 +42,7 @@ class Book(models.Model):
             max_length=1000, help_text="Enter a brief description of the book")
     isbn = models.CharField('ISBN', max_length=13,
                             unique=True,
-                            help_text='13 Character <a href="https://www.isbn-international.org/content/what-isbn">'
-                            '">ISBN number</a>')
+                            help_text='13 Character <a href="https://www.isbn-international.org/content/what-isbn">''ISBN number</a>')
     # ManyToField used because genre can contain many books. Books can cover many genres.
     # Genre class has already been defined so we can specify the object above.
 
@@ -123,7 +123,7 @@ class Language(models.Model):
 
     def get_absolute_url(self):
         """Return the url to access a particular language instance"""
-        return reverse('language detail', args=[str(self.id)])
+        return reverse('language-detail', args=[str(self.id)])
 
     def __str__(self):
         """String for representing the Model object (in Admin site etc.)"""
