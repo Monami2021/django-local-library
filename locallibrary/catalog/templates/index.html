@@ -7,13 +7,13 @@
   </p>
   <h2>Dynamic content</h2>
   <p>The library has the following record counts: </p>
-  <ul>
-    <li><strong>Book:</strong> {{ num_books }}</li>
-    <li><strong>Copies:</strong> {{ num_instances }}</li>
-    <li><strong>Copies available:</strong> {{ num_instances_available }}</li>
-    <li><strong>Authors:</strong>{{ num_authors }}</li>
+  <ul class="list-group w-25">
+    <li class="list-group-item list-group-item-action active"><strong>Book:</strong> {{ num_books }}</li>
+    <li class="list-group-item list-group-item-action"><strong>Copies:</strong> {{ num_instances }}</li>
+    <li class="list-group-item list-group-item-action"><strong>Copies available:</strong> {{ num_instances_available }}</li>
+    <li class="list-group-item list-group-item-action"><strong>Authors:</strong>{{ num_authors }}</li>
   </ul>
   <p>
-  You have visited this page {{ num_visits }} time{{ num_visits|pluralize }},
+  You have visited this page <span class="fw-bolder fs-3"> {{ num_visits }} time{{ num_visits|pluralize }} </span>,
   </p>
   {% endblock %}

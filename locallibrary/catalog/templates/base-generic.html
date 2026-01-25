@@ -21,18 +21,18 @@
       <div class="row">
         <div class="col-sm-2">
           {% block sidebar %}
-          <ul class="sidebar-nav">
-            <li><a href="{% url 'index' %}">Home</a></li>
-            <li><a href="{% url 'books' %}">All books</a></li>
-            <li><a href="{% url 'authors' %}">All authors</a></li>
+          <ul class="sidebar-nav list-group list-group-flush">
+            <li class="list-group-item"><a href="{% url 'index' %}">Home</a></li>
+            <li class="list-group-item"><a href="{% url 'books' %}">All books</a></li>
+            <li class="list-group-item"><a href="{% url 'authors' %}">All authors</a></li>
 
             {% if user.is_authenticated %}
-            <li>User: {{ user.get_username }}</li>
+            <li class="list-group-item h2 list-group-item-primary rounded text-center" >User: {{ user.get_username }}</li>
 
-            <li><a href="{% url 'my-borrowed' %}">My Borrowed</a></li>
+            <li class="list-group-item"><a href="{% url 'my-borrowed' %}">My Borrowed</a></li>
 
-            <li>
-              <form
+            <li class="list-group-item">
+               <form
                 id="logout-form"
                 method="post"
                 action="{% url 'admin:logout' %}"
@@ -42,24 +42,24 @@
               </form>
             </li>
             {% else %}
-            <li>
+            <li class="list-group-item">
               <a href="{% url 'login' %}?next={{ request.path }}">Login</a>
             </li>
             {% endif %}
             
             {% if user.is_staff %}
               <hr>
-              <ul class="side-bar">
-                <li>Staff</li>
-                <li><a href="{% url 'all-borrowed' %}">All borrowed</a></li>
+              <ul class="side-bar list-group">
+                <li class="list-group-item h2">Staff</li>
+                <li class="list-group-item"><a href="{% url 'all-borrowed' %}">All borrowed</a></li>
                 {% if perms.catalog.add_author %}
-                 <li><a href="{% url 'author-create' %}">Create author</a></li>
-                 <li><a href="{% url 'book-create' %}">Create book</a></li>
+                 <li class="list-group-item"><a href="{% url 'author-create' %}">Create author</a></li>
+                 <li class="list-group-item"><a href="{% url 'book-create' %}">Create book</a></li>
                  {% endif %}
               </ul>
               {% endif %}
             {% if perms.catalog.can_mark_returned %}
-               <li><a href="{% url 'all-borrowed' %}"> All borrowed books </a></li>
+               <li class="list-group-item"><a href="{% url 'all-borrowed' %}"> All borrowed books </a></li>
             {% endif %}
 
           </ul>

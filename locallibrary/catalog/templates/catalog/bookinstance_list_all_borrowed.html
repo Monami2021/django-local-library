@@ -5,9 +5,9 @@
  <h1>All borrowed books</h1>
 
   {% if bookinstance_list %}
-    <ul>
+    <ul class="list-group border border-2 w-50">
       {% for bookinst in bookinstance_list %}
-      <li class="{% if bookinst.is_overdue %}text-danger{% endif %}">
+      <li class="{% if bookinst.is_overdue %}text-danger{% endif %} list-group-item border border-2">
         <a href="{% url 'book-detail' bookinst.book.pk %}"><strong>{{ bookinst.book.title }}</strong></a>
         ({{ bookinst.due_back }})  — Borrower: {{ bookinst.borrower }} 
             {% if perms.catalog.can_mark_returned %} - <a href="{% url 'renew-book-librarian' bookinst.id %}">Renew</a> {% endif %}
